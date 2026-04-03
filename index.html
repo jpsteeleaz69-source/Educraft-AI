@@ -816,7 +816,10 @@ Return ONLY a valid JSON array with no markdown, no backticks, no preamble. Each
 
 Generate exactly ${count} plan(s) for each of ${levels.length} level(s) = ${total} total. Order by Bloom's level (lowest to highest). Return ONLY the JSON array.`;
 
-    const resp=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
+    const resp = await fetch("https://your-render-url.onrender.com/api/generate", {
+  headers: {
+    "Content-Type": "application/json"
+  },
     const data=await resp.json();
     const raw=data.content.map(i=>i.text||'').join('');
     const clean=raw.replace(/```json|```/g,'').trim();
